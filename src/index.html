@@ -110,5 +110,20 @@
     </div>
 
     <script src="./js/main.js"></script>
+
+    <script type="text/javascript">
+      setFormValues();
+
+      function setFormValues() {
+        const form = document.forms["form-profile"];
+        const args = location.search.substr(1).split(/&/);
+        for (let i = 0; i < args.length; ++i) {
+          const temp = args[i].split(/=/);
+          if (temp[0] !== "") {
+            form.elements["field-" + decodeURIComponent(temp[0]).trim()].value = decodeURIComponent(temp.slice(1).join("").replace("+", " "));
+          }
+        }
+      }
+    </script>
 </body>
 </html>
