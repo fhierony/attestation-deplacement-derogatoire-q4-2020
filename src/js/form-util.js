@@ -129,8 +129,6 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
       return
     }
 
-    console.log(getProfile(formInputs), reasons)
-
     const pdfBlob = await generatePdf(getProfile(formInputs), reasons, pdfBase)
 
     const creationInstant = new Date()
