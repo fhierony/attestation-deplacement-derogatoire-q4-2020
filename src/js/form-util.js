@@ -72,10 +72,9 @@ export function getProfile (formInputs) {
 }
 
 export function getReasons (reasonInputs) {
-  const reasons = reasonInputs
+  return reasonInputs
     .filter(input => input.checked)
     .map(input => input.value).join(', ')
-  return reasons
 }
 
 export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar) {
@@ -83,7 +82,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
     const exempleElt = input.parentNode.parentNode.querySelector('.exemple')
     const validitySpan = input.parentNode.parentNode.querySelector('.validity')
     if (input.placeholder && exempleElt) {
-      input.addEventListener('input', (event) => {
+      input.addEventListener('input', () => {
         if (input.value) {
           exempleElt.innerHTML = 'ex.&nbsp;: ' + input.placeholder
           validitySpan.removeAttribute('hidden')
@@ -104,7 +103,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
   })
 
   reasonInputs.forEach(radioInput => {
-    radioInput.addEventListener('change', function (event) {
+    radioInput.addEventListener('change', function () {
       const isInError = reasonInputs.every(input => !input.checked)
       reasonFieldset.classList.toggle('fieldset-error', isInError)
       reasonAlert.classList.toggle('hidden', !isInError)

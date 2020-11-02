@@ -14,8 +14,8 @@ const createTitle = () => {
 // createElement('div', { className: 'form-group' })
 
 const getCurrentTime = () => {
-  const date = new Date();
-  return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+  const date = new Date()
+  return date.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
 }
 
 const createFormGroup = ({
@@ -148,13 +148,11 @@ export function createForm () {
     .filter(field => !field.isHidden)
     .map((field,
       index) => {
-      const formGroup = createFormGroup({
+      return createFormGroup({
         autofocus: index === 0,
         ...field,
         name: field.key,
       })
-
-      return formGroup
     })
 
   const reasonsData = formData

@@ -1,4 +1,4 @@
-import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
+import { PDFDocument, rgb, StandardFonts } from 'pdf-lib'
 
 export async function generatePdf (e) {
   e.stopPropagation()
@@ -57,8 +57,7 @@ export async function generatePdf (e) {
 
 function downloadBlob (blob, fileName) {
   const link = document.createElement('a')
-  const url = URL.createObjectURL(blob)
-  link.href = url
+  link.href = URL.createObjectURL(blob)
   link.download = fileName
   document.body.appendChild(link)
   link.click()

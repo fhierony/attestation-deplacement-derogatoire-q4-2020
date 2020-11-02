@@ -35,8 +35,7 @@ export const appendTo = el => domNodes => {
 
 export function downloadBlob (blob, fileName) {
   const link = createElement('a')
-  const url = URL.createObjectURL(blob)
-  link.href = url
+  link.href = URL.createObjectURL(blob)
   link.download = fileName
   document.body.appendChild(link)
   link.click()
