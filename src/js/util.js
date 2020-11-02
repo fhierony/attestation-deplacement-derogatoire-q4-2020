@@ -28,12 +28,6 @@ export function addSlash (str) {
     .replace(/\/\//g, '/')
 }
 
-export function addVersion (version) {
-  document.getElementById(
-    'version',
-  ).innerHTML = `${new Date().getFullYear()} - ${version}`
-}
-
 export function fillForm () {
   const params = new URLSearchParams(window.location.search.substr(1))
 

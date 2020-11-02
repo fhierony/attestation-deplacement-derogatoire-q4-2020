@@ -63,8 +63,8 @@
       "pattern": "[0-9]{5}",
       "min": 1000,
       "max": 99999,
-      "minlength":4,
-      "maxlength":5
+      "minlength": 4,
+      "maxlength": 5
     }
   ],
   [

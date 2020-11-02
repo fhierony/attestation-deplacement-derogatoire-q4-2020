@@ -85,7 +85,7 @@ export async function generatePdf (profile, reasons, pdfBase) {
   if (!locationSize) {
     alert(
       'Le nom de la ville risque de ne pas être affiché correctement en raison de sa longueur. ' +
-        'Essayez d\'utiliser des abréviations ("Saint" en "St." par exemple) quand cela est possible.',
+      'Essayez d\'utiliser des abréviations ("Saint" en "St." par exemple) quand cela est possible.',
     )
     locationSize = 7
   }

@@ -56,6 +56,7 @@ function validateAriaFields () {
 export function setReleaseDateTime (releaseDateInput, loadedDate = new Date()) {
   releaseDateInput.value = getFormattedDate(loadedDate)
 }
+
 export function setReleaseHourTime (releaseTimeInput, loadedDate = new Date()) {
   releaseTimeInput.value = loadedDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
 }
