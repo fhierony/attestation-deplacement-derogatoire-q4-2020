@@ -3,35 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-  <meta content="#603cba" name="msapplication-TileColor">
   <meta content="#ffffff" name="theme-color">
-  <meta content="Générateur d'attestation de déplacement dérogatoire - COVID-19" name="title">
-  <meta
-    content="Ce service officiel génère une version numérique de la déclaration de déplacement covid-19 à présenter aux forces de sécurité lors d’un contrôle."
-    name="description">
-  <meta content="covid19, covid-19, attestation, déclaration, déplacement, officielle, gouvernement" name="keywords">
   <meta content="index, follow" name="robots">
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
   <meta content="French" name="language">
-  <meta content="Générateur d'attestation de déplacement dérogatoire  - COVID-19" property="og:title"/>
-  <meta content="fr_FR" property="og:locale"/>
-  <meta
-    content="Ce service officiel génère une version numérique de la déclaration de déplacement covid-19 à présenter aux forces de sécurité lors d’un contrôle."
-    property="og:description"/>
-  <link href="https://media.interieur.gouv.fr{{ PUBLIC_URL || '/deplacement-covid-19' }}" rel="canonical"/>
-  <meta content="https://media.interieur.gouv.fr{{ PUBLIC_URL || '/deplacement-covid-19' }}" property="og:url"/>
-  <meta content="Générateur d'attestation de déplacement dérogatoire  - COVID-19" property="og:site_name"/>
-  <script type='application/ld+json'>{
-    "@context": "http://www.schema.org",
-    "@type": "GovernmentOrganization",
-    "name": "Générateur d'attestation de déplacement dérogatoire  - COVID-19",
-    "description": "Ce service officiel génère une version numérique de la déclaration de déplacement covid-19 à présenter aux forces de sécurité lors d’un contrôle.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressCountry": "France"
-    }
-  }</script>
-
   <title>Attestation de déplacement dérogatoire</title>
 </head>
 <body>
@@ -49,19 +24,11 @@
         <span>Générer mon attestation</span></button>
     </p>
     <form accept-charset="UTF-8" id="form-profile"></form>
-    <div class="bg-primary  d-none" id="snackbar">
+    <div class="bg-primary d-none" id="snackbar">
       L'attestation est téléchargée sur votre appareil.
     </div>
   </div>
 </main>
-
-<div class="alert  alert-info  d-none" id="update-alert">
-  Une nouvelle version est disponible. Cliquer sur le bouton pour l'obtenir.
-  <p class="text-right">
-    <button class="btn  btn-info" id="reload-btn">Mettre à jour</button>
-  </p>
-</div>
-
 <script src="./js/main.js"></script>
 </body>
 </html>

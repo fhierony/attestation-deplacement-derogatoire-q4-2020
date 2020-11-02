@@ -90,18 +90,20 @@ const createReasonFieldset = (reasonsData) => {
   const fieldsetAttrs = {
     id: 'reason-fieldset',
     className: 'fieldset',
-    autofocus: true,
   }
 
   const fieldset = createElement('fieldset', fieldsetAttrs)
   const appendToFieldset = appendTo(fieldset)
+
+  const textLegendAttrs = { innerHTML: 'Motif(s)' }
+  const textLegend = createElement('legend', textLegendAttrs)
 
   const textAlertAttrs = { className: 'msg-alert hidden', innerHTML: 'Veuillez choisir un motif' }
   const textAlert = createElement('p', textAlertAttrs)
 
   const reasonsFields = reasonsData.items.map(createReasonField)
 
-  appendToFieldset([textAlert, ...reasonsFields])
+  appendToFieldset([textLegend, textAlert, ...reasonsFields])
   // Créer un form-checkbox par motif
   return fieldset
 }
