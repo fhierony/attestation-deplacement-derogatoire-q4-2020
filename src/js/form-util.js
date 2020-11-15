@@ -77,11 +77,6 @@ function clearForm () {
   storeDataInput.checked = false
 }
 
-function setCurrentDate (releaseDateInput) {
-  const currentDate = new Date()
-  releaseDateInput.value = getFormattedDate(currentDate)
-}
-
 function showSnackbar (snackbarToShow, showDuration = 6000) {
   snackbarToShow.classList.remove('d-none')
   setTimeout(() => snackbarToShow.classList.add('show'), 100)
@@ -96,12 +91,12 @@ export function wantDataToBeStored () {
   return storeDataInput.checked
 }
 
-export function setReleaseDateTime (releaseDateInput) {
-  const loadedDate = new Date()
-  releaseDateInput.value = getFormattedDate(loadedDate)
+export function setCurrentDate (releaseDateInput) {
+  const currentDate = new Date()
+  releaseDateInput.value = getFormattedDate(currentDate)
 }
 
-export function setReleaseHourTime (releaseTimeInput, loadedDate = new Date()) {
+export function setTime (releaseTimeInput, loadedDate = new Date()) {
   releaseTimeInput.value = loadedDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
 }
 
@@ -110,8 +105,7 @@ export function toAscii (string) {
     throw new Error('Need string')
   }
   const accentsRemoved = removeAccents(string)
-  const asciiString = accentsRemoved.replace(/[^\x00-\x7F]/g, '') // eslint-disable-line no-control-regex
-  return asciiString
+  return accentsRemoved.replace(/[^\x00-\x7F]/g, '') // eslint-disable-line no-control-regex
 }
 
 export function getProfile (formInputs) {
@@ -220,7 +214,7 @@ export function prepareForm () {
   const reasonAlert = reasonFieldset.querySelector('.msg-alert')
   const releaseDateInput = $('#field-datesortie')
   const releaseHourInput = $('#field-heuresortie')
-  setReleaseDateTime(releaseDateInput)
-  setReleaseHourTime(releaseHourInput, new Date(Date.now() + 300_000))
+  setCurrentDate(releaseDateInput)
+  setTime(releaseHourInput, new Date(Date.now() + 300_000))
   prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput)
 }

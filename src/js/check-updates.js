@@ -4,7 +4,7 @@ import { $ } from './dom-utils'
 const path = window.location.pathname
 const swName = `${window.location}sw.js`
 
-window.isUpdateAvailable = new Promise(function (resolve, reject) {
+window.isUpdateAvailable = new Promise(function (resolve) {
   // lazy way of disabling service workers while developing
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
