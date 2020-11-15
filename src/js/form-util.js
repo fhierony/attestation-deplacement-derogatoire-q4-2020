@@ -1,3 +1,5 @@
+import removeAccents from 'remove-accents'
+
 import { $, $$, downloadBlob } from './dom-utils'
 import { addSlash, getFormattedDate } from './util'
 import pdfBase from '../certificate.pdf'
@@ -53,12 +55,31 @@ function validateAriaFields () {
     .includes(true)
 }
 
-export function setReleaseDateTime (releaseDateInput, loadedDate = new Date()) {
-  releaseDateInput.value = getFormattedDate(loadedDate)
+function showSnackbar (snackbarToShow, showDuration = 6000) {
+  snackbarToShow.classList.remove('d-none')
+  setTimeout(() => snackbarToShow.classList.add('show'), 100)
+
+  setTimeout(function () {
+    snackbarToShow.classList.remove('show')
+    setTimeout(() => snackbarToShow.classList.add('d-none'), 500)
+  }, showDuration)
 }
 
-export function setReleaseHourTime (releaseTimeInput, loadedDate = new Date()) {
+export function setCurrentDate (releaseDateInput) {
+  const currentDate = new Date()
+  releaseDateInput.value = getFormattedDate(currentDate)
+}
+
+export function setTime (releaseTimeInput, loadedDate = new Date()) {
   releaseTimeInput.value = loadedDate.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+}
+
+export function toAscii (string) {
+  if (typeof string !== 'string') {
+    throw new Error('Need string')
+  }
+  const accentsRemoved = removeAccents(string)
+  return accentsRemoved.replace(/[^\x00-\x7F]/g, '') // eslint-disable-line no-control-regex
 }
 
 export function getProfile (formInputs) {
@@ -68,6 +89,9 @@ export function getProfile (formInputs) {
     if (field.id === 'field-datesortie') {
       const dateSortie = field.value.split('-')
       value = `${dateSortie[2]}/${dateSortie[1]}/${dateSortie[0]}`
+    }
+    if (typeof value === 'string') {
+      value = toAscii(value)
     }
     fields[field.id.substring('field-'.length)] = value
   }
@@ -138,14 +162,7 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
       .replace(':', '-')
 
     downloadBlob(pdfBlob, `attestation-${creationDate}_${creationHour}.pdf`)
-
-    snackbar.classList.remove('d-none')
-    setTimeout(() => snackbar.classList.add('show'), 100)
-
-    setTimeout(function () {
-      snackbar.classList.remove('show')
-      setTimeout(() => snackbar.classList.add('d-none'), 500)
-    }, 6000)
+    showSnackbar(snackbar, 6000)
   })
 }
 
@@ -157,7 +174,7 @@ export function prepareForm () {
   const reasonAlert = reasonFieldset.querySelector('.msg-alert')
   const releaseDateInput = $('#field-datesortie')
   const releaseHourInput = $('#field-heuresortie')
-  setReleaseDateTime(releaseDateInput)
-  setReleaseHourTime(releaseHourInput, new Date(Date.now() + 300_000))
-  prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar)
+  setCurrentDate(releaseDateInput)
+  setTime(releaseHourInput, new Date(Date.now() + 300_000))
+  prepareInputs(formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput)
 }

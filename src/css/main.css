@@ -86,13 +86,16 @@ svg {
 h1.flex.flex-wrap {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
+/*
 @media (prefers-color-scheme: dark) {
     h1.flex.flex-wrap {
         border: 1px solid white;
     }
 }
+*/
 
 h2 {
     font-size: large;
@@ -262,7 +265,7 @@ input[type=number] {
 }
 
 .exemple {
-    margin-top: 0.2em;
+    margin-bottom: 0;
     font-style: italic;
     color: #999999;
     height: 1em;
@@ -360,6 +363,11 @@ input[type=number] {
 
 .btn-attestation:hover {
     background-color: #3031C1;
+}
+
+.btn-clear-data {
+    margin: 30px auto;
+    max-width: 400px;
 }
 
 .github {
@@ -585,7 +593,7 @@ em {
     }
 }
 
-#snackbar {
+#snackbar, #snackbar-cleardata {
     min-width: 250px;
     color: #fff;
     text-align: center;
@@ -602,7 +610,7 @@ em {
     transition: all 0.5s ease-in-out;
 }
 
-#snackbar.show {
+#snackbar.show, #snackbar-cleardata.show {
     opacity: 1;
 }
 
@@ -645,6 +653,10 @@ em {
     color: #030494;
     background-color: #caf8ff;
     border-color: #caf8ff;
+}
+
+.basis-100 {
+    flex-basis: 100%;
 }
 
 .btn-info {
