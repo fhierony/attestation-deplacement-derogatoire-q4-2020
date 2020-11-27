@@ -130,6 +130,10 @@ export function getReasons (reasonInputs) {
     .map(input => input.value).join(', ')
 }
 
+export function getName () {
+  return $('#field-lastname').value + '_' + $('#field-firstname').value
+}
+
 export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonAlert, snackbar, releaseDateInput) {
   const lsProfile = secureLS.get('profile')
 
@@ -196,12 +200,14 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
     const pdfBlob = await generatePdf(getProfile(formInputs), reasons, pdfBase)
 
     const creationInstant = new Date()
-    const creationDate = creationInstant.toLocaleDateString('fr-CA')
+    const creationDate = creationInstant
+      .toLocaleDateString('fr-CA')
+      .replace(/-/g, '')
     const creationHour = creationInstant
       .toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-      .replace(':', '-')
+      .replace(/:/g, '')
 
-    downloadBlob(pdfBlob, `attestation-${creationDate}_${creationHour}.pdf`)
+    downloadBlob(pdfBlob, `Attestation-${getName()}-${creationDate}_${creationHour}.pdf`)
     showSnackbar(snackbar, 6000)
   })
 }
