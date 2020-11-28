@@ -69,20 +69,6 @@
   ],
   [
     {
-      "key": "creationDate",
-      "type": "date",
-      "contentType": "creationDate",
-      "label": "Date de création",
-      "isHidden": true
-    },
-    {
-      "key": "creationHour",
-      "type": "time",
-      "contentType": "creationHour",
-      "label": "Heure de création",
-      "isHidden": true
-    },
-    {
       "key": "datesortie",
       "type": "date",
       "contentType": "datesortie",

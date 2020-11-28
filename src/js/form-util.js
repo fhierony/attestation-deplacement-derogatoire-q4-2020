@@ -1,7 +1,7 @@
 import removeAccents from 'remove-accents'
 
 import { $, $$, downloadBlob } from './dom-utils'
-import { addSlash, getFormattedDate } from './util'
+import { addSlash, getFormattedDate, parseDate } from './util'
 import pdfBase from '../certificate.pdf'
 import { generatePdf } from './pdf-util'
 
@@ -159,13 +159,14 @@ export function prepareInputs (formInputs, reasonInputs, reasonFieldset, reasonA
 
     const pdfBlob = await generatePdf(getProfile(formInputs), reasons, pdfBase)
 
-    const creationInstant = new Date()
+    const dateSortie = $('#field-datesortie').value.split('-')
+    const creationInstant = parseDate(`${dateSortie[2]}/${dateSortie[1]}/${dateSortie[0]}`, $('#field-heuresortie').value)
     const creationDate = creationInstant
       .toLocaleDateString('fr-CA')
       .replace(/-/g, '')
     const creationHour = creationInstant
       .toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-      .replace(/:/g, '')
+      .replace(':', '')
 
     downloadBlob(pdfBlob, `Attestation-${getName()}-${creationDate}_${creationHour}.pdf`)
     showSnackbar(snackbar, 6000)

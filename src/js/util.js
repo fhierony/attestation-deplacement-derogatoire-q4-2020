@@ -41,3 +41,9 @@ export function fillForm () {
     }
   }
 }
+
+export function parseDate (date, time) {
+  const splitDate = date.split('/')
+  const splitTime = time.split(':')
+  return new Date(splitDate[2], splitDate[1] - 1, splitDate[0], splitTime[0], splitTime[1])
+}
