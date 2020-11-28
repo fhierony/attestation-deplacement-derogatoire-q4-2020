@@ -1,4 +1,4 @@
-import { generateQR } from './util'
+import { generateQR, parseDate } from './util'
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib'
 
 const ys = {
@@ -14,12 +14,6 @@ const ys = {
 }
 
 export async function generatePdf (profile, reasons, pdfBase) {
-  const creationInstant = new Date()
-  const creationDate = creationInstant.toLocaleDateString('fr-FR')
-  const creationHour = creationInstant
-    .toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
-    .replace(':', 'h')
-
   const {
     lastname,
     firstname,
@@ -31,6 +25,12 @@ export async function generatePdf (profile, reasons, pdfBase) {
     datesortie,
     heuresortie,
   } = profile
+
+  const creationInstant = parseDate(datesortie, heuresortie)
+  const creationDate = creationInstant.toLocaleDateString('fr-FR')
+  const creationHour = creationInstant
+    .toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+    .replace(':', 'h')
 
   const data = [
     `Cree le: ${creationDate} a ${creationHour}`,
@@ -86,7 +86,7 @@ export async function generatePdf (profile, reasons, pdfBase) {
   if (!locationSize) {
     alert(
       'Le nom de la ville risque de ne pas être affiché correctement en raison de sa longueur. ' +
-        'Essayez d\'utiliser des abréviations ("Saint" en "St." par exemple) quand cela est possible.',
+      'Essayez d\'utiliser des abréviations ("Saint" en "St." par exemple) quand cela est possible.',
     )
     locationSize = 7
   }
