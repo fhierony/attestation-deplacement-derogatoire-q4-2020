@@ -123,9 +123,7 @@ export function createForm () {
   const formFirstPart = formData
     .flat(1)
     .filter(field => field.key !== 'reason')
-    .filter(field => !field.isHidden)
-    .map((field,
-      index) => {
+    .map((field) => {
       return createFormGroup({
         autofocus: false,
         ...field,
